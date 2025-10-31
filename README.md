@@ -9,13 +9,6 @@ Moocho API is a Node.js/Express backend for managing user authentication via Goo
 - [Features](#features)
 - [Technologies](#technologies)
 - [Installation](#installation)
-- [Environment Variables](#environment-variables)
-- [Running the API](#running-the-api)
-- [API Documentation](#api-documentation)
-- [Folder Structure](#folder-structure)
-- [Contributing](#contributing)
-- [License](#license)
-- [GitHub](#github)
 
 ---
 
