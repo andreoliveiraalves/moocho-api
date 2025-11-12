@@ -26,7 +26,7 @@ router.get('/google', passport.authenticate('google', { scope: ['profile', 'emai
  *         description: Redirects to home on success or /login on failure
  */
 router.get(
-    '/auth/google/callback',
+    '/google/callback',
     passport.authenticate('google', { failureRedirect: '/login' }),
     (req, res) => res.redirect('/')
 )

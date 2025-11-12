@@ -50,7 +50,13 @@ passport.use(
                         accessToken,
                         refreshToken,
                         movies: [],
-                        createdAt: new Date().toISOString()
+                        friends: [],
+                        requests: [],
+                        createdAt: new Date().toISOString(),
+                        avatar: {
+                            backgroundColor: '#82CAFF',
+                            mascot: 'default.png'
+                        }
                     }
                 }
 

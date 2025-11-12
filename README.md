@@ -21,7 +21,7 @@ Moocho API is a Node.js/Express backend for managing user authentication via Goo
 - Swagger UI documentation
 - Responsive HTML root page with mascot
 - Easily extendable routes for movies and users
-
+- Data provided by TMDb API (https://www.themoviedb.org/)
 ---
 
 ## Technologies

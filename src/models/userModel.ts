@@ -1,46 +1,33 @@
-// Defines Rating object structure provinient from OMDb API
-export interface OMDbRating {
-    Source: string
-    Value: string
-}
+import type { TMDBMovie, TMDBTVShow } from '../models/movieModel.js'
 
-// Defines Movie object structure provinient from OMDb API
-export interface OMDbMovie {
-    imdbID: string
-    Title: string
-    Year: string
-    Rated?: string
-    Released?: string
-    Runtime?: string
-    Genre?: string
-    Director?: string
-    Writer?: string
-    Actors?: string
-    Plot?: string
-    Language?: string
-    Country?: string
-    Awards?: string
-    Poster?: string
-    Ratings?: OMDbRating[]
-    Metascore?: string
-    imdbRating?: string
-    imdbVotes?: string
-    Type?: string
-    DVD?: string
-    BoxOffice?: string
-    Production?: string
-    Website?: string
-}
-
-// Defines the movie object structure from user watched movies array.
 export interface UserMovie {
-    imdbID: string
-    rating: number
+    tmdbId: string
+    rating?: number        // rating optional, in case user hasn’t rated yet
     watchedAt: string
-    details?: OMDbMovie
+    details?: TMDBMovie
 }
 
-// Defines the User object structure
+export interface UserShow {
+    tmdbId: string
+    rating?: number        // optional rating
+    watchedAt: string
+    details?: TMDBTVShow
+}
+
+// --- Friend request ---
+export type FriendRequest = {
+    from: string
+    status: 'pending' | 'accepted' | 'rejected'
+    sentAt: string
+}
+
+// --- Avatar ---
+export type UserAvatar = {
+    backgroundColor: string
+    mascot: string
+}
+
+// --- User ---
 export interface User {
     id: string
     displayName: string
@@ -48,5 +35,14 @@ export interface User {
     accessToken?: string
     refreshToken?: string
     movies: UserMovie[]
+    shows: UserShow[]
+    friends: string[]
+    requests: FriendRequest[]
     createdAt: string
+    avatar: UserAvatar
 }
+
+// --- User profile previews ---
+export type ProfileUser = Omit<User, 'accessToken' | 'refreshToken'>
+export type SafeUser = Omit<User, 'accessToken' | 'refreshToken' | 'email' | 'friends' | 'requests' | 'movies' | 'shows' | 'createdAt'>
+export type FriendlyUser = Omit<User, 'accessToken' | 'refreshToken' | 'email' | 'requests'>
