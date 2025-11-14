@@ -1,17 +1,13 @@
-import type { TMDBMovie, TMDBTVShow } from '../models/movieModel.js'
-
 export interface UserMovie {
     tmdbId: string
     rating?: number        // rating optional, in case user hasn’t rated yet
     watchedAt: string
-    details?: TMDBMovie
 }
 
 export interface UserShow {
     tmdbId: string
     rating?: number        // optional rating
     watchedAt: string
-    details?: TMDBTVShow
 }
 
 // --- Friend request ---
