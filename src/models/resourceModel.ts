@@ -2,20 +2,17 @@
 // TMDB GENRES AND COMMON ENTITIES
 // ======================================
 
-// Standard genre object
 export interface TMDBGenre {
     id: number
     name: string
 }
 
-// Spoken language object
 export interface TMDBSpokenLanguage {
     iso_639_1: string
     english_name: string
     name: string
 }
 
-// Production company
 export interface TMDBProductionCompany {
     id: number
     name: string
@@ -23,13 +20,11 @@ export interface TMDBProductionCompany {
     origin_country: string
 }
 
-// Production country
 export interface TMDBProductionCountry {
     iso_3166_1: string
     name: string
 }
 
-// Collection (sagas)
 export interface TMDBCollection {
     id: number
     name: string
@@ -43,7 +38,6 @@ export interface TMDBCollection {
 // MOVIES
 // ======================================
 
-// Movie Lite (returned by /movie/popular, /movie/top_rated, /search/movie, etc.)
 export interface TMDBMovie {
     id: number
     title: string
@@ -63,10 +57,9 @@ export interface TMDBMovie {
     vote_average: number
     vote_count: number
 
-    genre_ids: number[] // In lists TMDB only returns IDs
+    genre_ids: number[]
 }
 
-// Movie Full (returned by /movie/{id})
 export interface TMDBMovieFull {
     id: number
     title: string
@@ -107,7 +100,6 @@ export interface TMDBMovieFull {
 // TV SHOWS
 // ======================================
 
-// TV Lite (returned by /tv/popular, /tv/top_rated, /search/tv, etc.)
 export interface TMDBTVShow {
     id: number
     name: string
@@ -129,7 +121,22 @@ export interface TMDBTVShow {
     adult?: boolean
 }
 
-// Extra entities for full TV show data
+export interface TMDBEpisodeSummary {
+    id: number
+    name: string
+    overview: string
+    vote_average: number
+    vote_count: number
+    air_date: string
+    episode_number: number
+    episode_type: string
+    production_code: string
+    runtime: number | null
+    season_number: number
+    show_id: number
+    still_path: string | null
+}
+
 export interface TMDBCreatedBy {
     id: number
     credit_id: string
@@ -155,7 +162,6 @@ export interface TMDBSeason {
     poster_path: string | null
 }
 
-// TV Full (returned by /tv/{id})
 export interface TMDBTVShowFull {
     id: number
     name: string
@@ -180,8 +186,11 @@ export interface TMDBTVShowFull {
 
     in_production: boolean
     episode_run_time: number[]
-    number_of_episodes?: number
-    number_of_seasons?: number
+    number_of_episodes: number
+    number_of_seasons: number
+
+    languages: string[]
+    origin_country: string[]
 
     genres: TMDBGenre[]
     created_by: TMDBCreatedBy[]
@@ -191,15 +200,17 @@ export interface TMDBTVShowFull {
     production_countries: TMDBProductionCountry[]
     spoken_languages: TMDBSpokenLanguage[]
     networks: TMDBNetwork[]
+
+    last_episode_to_air: TMDBEpisodeSummary | null
+    next_episode_to_air: TMDBEpisodeSummary | null
 }
 
 
 
 // ======================================
-// PERSONS / ACTORS
+// PERSONS
 // ======================================
 
-// Movie/TV credits inside "known_for"
 export interface TMDBMediaCreditMovie {
     id: number
     media_type: 'movie'
@@ -233,7 +244,6 @@ export interface TMDBMediaCreditTV {
 
 export type TMDBKnownFor = TMDBMediaCreditMovie | TMDBMediaCreditTV
 
-// Person Lite (returned by /search/person, /person/popular)
 export interface TMDBPerson {
     id: number
     name: string
@@ -244,7 +254,6 @@ export interface TMDBPerson {
     known_for: TMDBKnownFor[]
 }
 
-// Person Full (returned by /person/{id})
 export interface TMDBPersonFull {
     id: number
     name: string
@@ -258,15 +267,16 @@ export interface TMDBPersonFull {
     popularity: number
     profile_path: string | null
     also_known_as: string[]
+
+    adult: boolean
 }
 
 
 
 // ======================================
-// PAGINATED RESPONSE
+// PAGINATION
 // ======================================
 
-// For endpoints like /movie/popular, /tv/top_rated etc.
 export interface TMDBPaginatedResponse<T> {
     page: number
     results: T[]

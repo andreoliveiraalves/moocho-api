@@ -39,5 +39,6 @@ app.use('/profile', profileRoutes)
 app.use('/ratings', ratingRoutes)
 app.use('/friends', friendsRoutes)
 
+
 // server start
 app.listen(PORT, () => console.log(`🚀 Server running on http://localhost:${PORT}`))
